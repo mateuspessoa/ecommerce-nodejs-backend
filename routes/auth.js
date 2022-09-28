@@ -19,4 +19,34 @@ router.post("/register", async (req, res) => {
     }
 });
 
+//Login
+router.post("/login", async (req, res) => {
+    try {
+        const user = await User.findOne({username: req.body.username});
+
+        //Verificando se o usuário existe
+        if(!user) {
+            res.status(401).json("Usuário não encontrado");
+        }
+
+        //Descriptografando a senha
+        const hashedPassword = CryptoJS.AES.decrypt(user.password, process.env.PASS_SEC);
+        const OriginalPassword = hashedPassword.toString(CryptoJS.enc.Utf8);
+
+        //Verificando se a senha está correta
+        if(OriginalPassword !== req.body.password) {
+            res.status(401).json("Senha incorreta");
+            return
+        }
+
+        //Excluindo a senha do retorno para não ser exibida
+        const { password, ...others } = user._doc;
+
+        res.status(200).json(others);
+
+    }catch(err) {
+        res.status(500).json(err);
+    }
+});
+
 module.exports = router
