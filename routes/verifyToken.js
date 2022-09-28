@@ -16,4 +16,16 @@ const verifyToken = (req, res, next) => {
     }
 };
 
-module.exports = { verifyToken };
+//Verificando se o usuário tem autorização ou se é um admin
+const verifyTokenAndAuthorization = (req, res, next) => {
+
+    verifyToken(req, res, () => {
+        if(req.user.id === req.params.id || req.user.isAdmin) {
+            next()
+        } else {
+            res.status(403).json("Usuário sem permissão")
+        }
+    })
+}
+
+module.exports = { verifyToken, verifyTokenAndAuthorization };
