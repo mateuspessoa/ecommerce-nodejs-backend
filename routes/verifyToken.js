@@ -5,6 +5,9 @@ const verifyToken = (req, res, next) => {
 
     if(authHeader) {
 
+        //Opcional - Serve para tirar os espaços do token, se tiver
+        const token = authHeader.split(" ")[1];
+
         jwt.verify(token, process.env.JWT_SEC, (err, user) => {
             if(err) res.status(401).json("Token Inválido")
             req.user = user;
