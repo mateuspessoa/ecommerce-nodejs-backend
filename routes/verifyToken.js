@@ -14,4 +14,6 @@ const verifyToken = (req, res, next) => {
     } else {
         return res.status(401).json("Você não está autenticado")
     }
-}
+};
+
+module.exports = { verifyToken };
