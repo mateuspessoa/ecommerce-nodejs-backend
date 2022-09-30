@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const userRoute = require("./routes/user")
 const authRoute = require("./routes/auth")
+const ProductRoute = require("./routes/product")
 const cors = require("cors")
 
 dotenv.config()
@@ -17,6 +18,7 @@ app.use(cors());
 app.use(express.json());
 app.use("/api/auth", authRoute);
 app.use("/api/users", userRoute);
+app.use("/api/products", ProductRoute);
 
 app.listen(5000, () => {
     console.log("Servidor Backend está rodando!")
