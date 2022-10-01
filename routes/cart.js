@@ -1,5 +1,4 @@
 const router = require("express").Router();
-const Product = require("../models/Product");
 const Cart = require("../models/Cart")
 const { verifyToken, verifyTokenAndAuthorization, verifyTokenAndAdmin } = require("./verifyToken");
 const CryptoJS = require("crypto-js")

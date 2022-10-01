@@ -5,6 +5,8 @@ const dotenv = require("dotenv");
 const userRoute = require("./routes/user")
 const authRoute = require("./routes/auth")
 const ProductRoute = require("./routes/product")
+const CartRoute = require("./routes/cart")
+const OrderRoute = require("./routes/order")
 const cors = require("cors")
 
 dotenv.config()
@@ -19,6 +21,8 @@ app.use(express.json());
 app.use("/api/auth", authRoute);
 app.use("/api/users", userRoute);
 app.use("/api/products", ProductRoute);
+app.use("/api/carts", CartRoute);
+app.use("/api/orders", OrderRoute);
 
 app.listen(5000, () => {
     console.log("Servidor Backend está rodando!")
