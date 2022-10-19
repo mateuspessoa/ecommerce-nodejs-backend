@@ -7,6 +7,7 @@ const authRoute = require("./routes/auth")
 const ProductRoute = require("./routes/product")
 const CartRoute = require("./routes/cart")
 const OrderRoute = require("./routes/order")
+const stripeRoute = require("./routes/stripe");
 const cors = require("cors")
 
 dotenv.config()
@@ -23,6 +24,7 @@ app.use("/api/users", userRoute);
 app.use("/api/products", ProductRoute);
 app.use("/api/carts", CartRoute);
 app.use("/api/orders", OrderRoute);
+app.use("/api/checkout", stripeRoute);
 
 app.listen(5000, () => {
     console.log("Servidor Backend está rodando!")
